@@ -1,34 +1,19 @@
 <!doctype html>
 <html>
 <head>
-    <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
-    <style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-    </style>
+     <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
+     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+         <link href="static/styles.css" rel="stylesheet">
 </head>
 
 <body>
+    <div class="container">
+        {% block content %}BODY CONTENT GOES HERE{% endblock %}
 
-    {% block content %}BODY CONTENT GOES HERE{% endblock %}
-
-    <p>
-        <form action="/">
-            <input type="submit" value="Home">
-        </form>
-    </p>
-
+        <div class="col">
+            <form action="/">
+                <input type="submit" value="Home">
+            </form>
+        </div>
+    </div>
 </body>

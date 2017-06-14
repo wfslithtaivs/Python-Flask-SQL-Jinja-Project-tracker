@@ -48,6 +48,41 @@ def get_project():
                            students=students)
     return html
 
+@app.route("/assign-for-grading")
+def show_grading_form():
+    """Render grading page"""
+
+    students = hackbright.get_students()
+    projects = hackbright.get_projects()
+
+    return render_template("grading.html", 
+                            students = students, 
+                            projects=projects)
+
+
+@app.route("/assign-grade", methods=['POST'])
+def grade_student_for_project():
+    """Grade student on project"""
+
+    # raise "Aaaaa"
+
+    github = request.form.get("github")
+    title = request.form.get("title")
+    grade = request.form.get("grade")
+
+    # validate if grade is not exided a max_grade
+    hackbright.assign_grade(github, title, grade)
+
+    first, last, github = hackbright.get_student_by_github(github)
+    projects = hackbright.get_grades_by_github(github)
+
+    html = render_template("student_info.html",
+                           first=first,
+                           last=last,
+                           github=github,
+                           projects=projects)
+    return html
+
 
 @app.route("/student-search")
 def get_student_form():

@@ -1,61 +1,70 @@
-<!doctype html>
-<html>
-<head>
-    <title>Student Info</title>
-</head>
-<body>
 
-  <h1> Welcome to a complicated world of student-project relations</h1>
+{% extends '_base.html' %}
 
-  <h2> You can do something with hackbright database:</h2>
+{% block title %} Welcome to Hackbright Database {% endblock %}
 
-  <ul>
-    <li> Search for students 
-      <p> 
-          <form action="/student">
-            <p>Enter GitHub username</p>
-              <input type="text" name="github"> 
-          <input type="submit" value="Display Student">
-        </form>
-      </p>
-    </li>
-    <li> Add new student 
-      <p>
-        <form action="/student-add" method="POST">
-            <p>First name <input type="text" name="first_name"></p> 
-            <p>Last name <input type="text" name="last_name"></p>
-            Github <input type="text" name="github">
-            <p><input type="submit" value="Add student"></p>
-        </form>
-      </p>
-    </li>
-    <li> Add new project 
-      <p>
-        <form action="/project-add" method="POST">
-            <p>Title <input type="text" name="first_name"></p> 
-            <p>Description</p> 
-            <p>
-            <textarea rows="4" cols="50" name="description"></textarea>
-            </p>
-            Maximum grade <input type="text" name="github">
-            <p><input type="submit" value="Add project"></p>
-        </form>
-      </p>
-     </li>
-      <li>
-        Search for projects
+{% block content %}
+  <div class="page-header">
+    <h1> Welcome to a complicated world of student-project relations</h1>
+    <h2> You can do something with hackbright database:</h2>
+  </div> 
+  
+  <div class="row">
+    <ul>
+      <li> Search for students 
+        <p> 
+            <form action="/student">
+              <p>Enter GitHub username</p>
+                <input type="text" name="github"> 
+            <input type="submit" value="Display Student">
+          </form>
+        </p>
+      </li>
+      <li> Add new student 
         <p>
-        <form action="/project">
-            Project title <input type="text" name="title">
-            <input type="submit" value="Display project info">
-        </form>
-      </p>
-    </li>
-    </li>
-  </ul>
+          <form action="/student-add" method="POST">
+              <p>First name <input type="text" name="first_name"></p> 
+              <p>Last name <input type="text" name="last_name"></p>
+              Github <input type="text" name="github">
+              <p><input type="submit" value="Add student"></p>
+          </form>
+        </p>
+      </li>
+      <li> Add new project 
+        <p>
+          <form action="/project-add" method="POST">
+              <p>Title <input type="text" name="title"></p> 
+              <p>Description</p> 
+              <p>
+              <textarea rows="4" cols="50" name="description"></textarea>
+              </p>
+              Maximum grade <input type="text" name="max_grade">
+              <p><input type="submit" value="Add project"></p>
+          </form>
+        </p>
+       </li>
+        <li>
+          Search for projects
+          <p>
+          <form action="/project">
+              Project title <input type="text" name="title">
+              <input type="submit" value="Display project info">
+          </form>
+        </p>
+      </li>
+      </li>
+    </ul>
+  </div>
 
-  <h2> In case lack of fantasy, available for exploration:</h2>
+  <div class="col">
+    <form action="/assign-for-grading">
+      <span style="color:red">Professors only!</span>
+      <input type="submit" value="Grade project">
+    </form>
+  </div>
 
+  <div class="col">
+  <h2> In case of lack of fantasy, available for exploration:</h2>
   <table>
     <tr>
         <th>Students</th>
@@ -78,7 +87,6 @@
         </td>
     </tr>
     </table>
+  </div>
 
-
-</body>
-</html>
+{% endblock %}
