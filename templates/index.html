@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <title>Student Info</title>
+</head>
+<body>
+
+
+  <h2> What do you want to do with hackbright database?</h2>
+
+  <ul>
+    <li> Search for students 
+      <p> 
+          <form action="/student">
+            <p>Enter GitHub username</p>
+              <input type="text" name="github"> 
+          <input type="submit" value="Display Student">
+        </form>
+      </p>
+    </li>
+    <li> Add new student 
+      <p>
+        <form action="/student-add" method="POST">
+            <p>First name <input type="text" name="first_name"></p> 
+            <p>Last name <input type="text" name="last_name"></p>
+            Github <input type="text" name="github">
+            <input type="submit" value="Add student">
+        </form>
+      </p>
+      <li>
+        Search for projects
+        <p>
+        <form action="/project">
+            Project title <input type="text" name="title">
+            <input type="submit" value="Display project info">
+        </form>
+      </p>
+    </li>
+    </li>
+  </ul>
+
+  <h2> Available for exploration: </h2>
+
+  <table>
+    <tr>
+        <th>Students</th>
+        <th>Projects</th>
+    </tr>    
+    <tr>
+        <td  valign="top">
+             <ul>
+             {% for student in students:%}
+                <li><a href="/student?github={{student[2]}}"> {{student[0]}} {{student[1]}}</a></li>
+             {% endfor %} 
+            </ul>
+        </td>
+        <td  valign="top">
+            <ul>
+             {% for project in projects:%}
+                <li><a href="/project?title={{project[0]}}">{{project[1]}}</a></li>
+             {% endfor %} 
+            </ul>
+        </td>
+    </tr>
+    </table>
+
+
+</body>
+</html>
