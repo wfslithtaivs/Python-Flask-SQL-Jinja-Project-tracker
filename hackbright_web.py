@@ -1,6 +1,6 @@
 """A web application for tracking projects, students, and student grades."""
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 
 import hackbright
 
@@ -30,7 +30,6 @@ def get_student():
                            last=last,
                            github=github,
                            projects=projects)
-
     return html
 
 
@@ -39,7 +38,7 @@ def get_project():
     """Show information about a project."""
 
     title = request.args.get('title')
-    title, description, max_grade = hackbright. get_project_by_title(title)
+    title, description, max_grade = hackbright.get_project_by_title(title)
     students = hackbright.get_grades_by_title(title)
 
     html = render_template("project_info.html",
@@ -47,7 +46,6 @@ def get_project():
                            description=description,
                            max_grade=max_grade,
                            students=students)
-
     return html
 
 
@@ -66,14 +64,39 @@ def student_add():
     last_name = request.form.get("last_name")
     github = request.form.get("github")
 
-    msg = hackbright.make_new_student(first_name, last_name, github)
 
-    html = render_template("student_info.html",
-                        first = first_name,
-                        last = last_name,
-                        github = github,
-                        msg = msg)
-    return html
+    if first_name == "" or last_name == "" or github == "":
+        # need to add parameter flash_msg to session and remove it in "/" after display
+        return redirect('/')
+    else:
+        msg = hackbright.make_new_student(first_name, last_name, github)
+
+        return render_template("student_info.html",
+                            first = first_name,
+                            last = last_name,
+                            github = github,
+                            msg = msg)
+
+
+@app.route("/project-add", methods=['POST'])
+def project_add():
+    """Add a project."""
+
+    title = request.form.get("title")
+    description = request.form.get("description")
+    max_grade = request.form.get("max_grade")
+
+    if title == "" or description == "" or max_grade == "":
+        # need to add parameter flash_msg to session and remove it in "/" after display
+        return redirect('/')
+    else:
+        msg = hackbright.make_new_project(title, description, max_grade)
+
+        return render_template("project_info.html",
+                           title=title,
+                           description=description,
+                           max_grade=max_grade)
+
 
 if __name__ == "__main__":
     hackbright.connect_to_db(app)

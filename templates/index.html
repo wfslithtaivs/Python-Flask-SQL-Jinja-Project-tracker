@@ -5,8 +5,9 @@
 </head>
 <body>
 
+  <h1> Welcome to a complicated world of student-project relations</h1>
 
-  <h2> What do you want to do with hackbright database?</h2>
+  <h2> You can do something with hackbright database:</h2>
 
   <ul>
     <li> Search for students 
@@ -24,9 +25,23 @@
             <p>First name <input type="text" name="first_name"></p> 
             <p>Last name <input type="text" name="last_name"></p>
             Github <input type="text" name="github">
-            <input type="submit" value="Add student">
+            <p><input type="submit" value="Add student"></p>
         </form>
       </p>
+    </li>
+    <li> Add new project 
+      <p>
+        <form action="/project-add" method="POST">
+            <p>Title <input type="text" name="first_name"></p> 
+            <p>Description</p> 
+            <p>
+            <textarea rows="4" cols="50" name="description"></textarea>
+            </p>
+            Maximum grade <input type="text" name="github">
+            <p><input type="submit" value="Add project"></p>
+        </form>
+      </p>
+     </li>
       <li>
         Search for projects
         <p>
@@ -39,7 +54,7 @@
     </li>
   </ul>
 
-  <h2> Available for exploration: </h2>
+  <h2> In case lack of fantasy, available for exploration:</h2>
 
   <table>
     <tr>
